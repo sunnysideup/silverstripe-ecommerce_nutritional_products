@@ -1,0 +1,10 @@
+---
+Name: ecommerce_nutritional_products_customer
+---
+NutriHolderItem:
+  default_rows:
+    - Energy
+    - Calories
+    - Dead Ants
+
+    

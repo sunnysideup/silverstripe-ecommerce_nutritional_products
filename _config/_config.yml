@@ -1,0 +1,18 @@
+---
+Name: ecommerce_nutritional_products
+Before: 'mysite/*'
+After: 'framework/*','cms/*', 'ecommerce/*'
+---
+
+
+ProductGroup:
+  extensions:
+    - NutriHolderProductDataExtension
+
+---
+Only:
+  classexists: 'ProductVariation'
+---
+ProductVariation:
+  extensions:
+    - NutriHolderProductDataExtension
