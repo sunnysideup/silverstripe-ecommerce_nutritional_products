@@ -85,6 +85,11 @@ class NutriHolder extends DataObject
         'AdditionalInfo' => 'PartialMatchFilter'
     );
 
+    private static $has_many = array(
+        'NutriRows' => 'NutriRow',
+        'Products' => 'ProductGroup',
+        'ProductVariations' => 'ProductVariation'
+    );
 
     public function getCMSFields()
     {
