@@ -3,7 +3,6 @@
 class NutriRow extends DataObject
 {
 
-
     private static $default_rows = array(
         "Energy",
         "Protein",

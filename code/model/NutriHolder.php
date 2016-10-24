@@ -16,6 +16,7 @@ class NutriHolder extends DataObject
     }
 
     private static $db = array(
+        'ProfileName' => 'Varchar',
         'ServingCount' => 'Int',
         'Container' => 'Varchar(10)',
         'ServingSize' => 'Varchar(15)',
@@ -55,11 +56,14 @@ class NutriHolder extends DataObject
      */
     function Title(){ return $this->getTitle();}
     function getTitle(){
-        $string = "";
-        $string .= "serving: ".$this->ServingCount."; size: ".$this->ServingSize."; used by ";
-        if($this->Products()->count()) {
-            $string .= implode(", ", $this->Products()->column("Title")).".";
+        $string = $this->ProfileName;
+        if(!$string) {
+            $string = 'Profile #'.$this->ID.' (please customise) ';
         }
+        $string .= ': ';
+        $string .= "serving: ".$this->ServingCount."; ";
+        $string .= "size: ".$this->ServingSize."; ";
+        $string .= "container: ".$this->Container."; ";
         return $string;
     }
 
