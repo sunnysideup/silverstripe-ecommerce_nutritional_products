@@ -15,22 +15,6 @@ class NutriHolderProductDataExtension extends DataExtension
     {
         $fields->removeByName('NutriHolderID');
         if($this->owner->NutriHolder()->exists()){
-            $config = new GridFieldConfig_RelationEditor();
-            $config->removeComponentsByType('GridFieldAddNewButton');
-            $config->removeComponentsByType('GridFieldFilterHeader');
-            $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
-            
-            $fields->addFieldToTab(
-                'Root.Nutrition', 
-                GridField::create(
-                    'NutriHolder', 
-                    'Nutritional Information', 
-                    NutriHolder::get()->filter(array('ID' => $this->owner->NutriHolderID)),
-                    $config
-                )
-            );
-        } else {
-
             $fields->addFieldsToTab(
                 'Root.Nutrition',
                 array(
@@ -42,6 +26,6 @@ class NutriHolderProductDataExtension extends DataExtension
             );
         }
     }
-    
+
 
 }

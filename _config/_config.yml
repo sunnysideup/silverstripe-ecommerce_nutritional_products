@@ -9,6 +9,11 @@ ProductGroup:
   extensions:
     - NutriHolderProductDataExtension
 
+ProductConfigModelAdmin:
+  managed_models:
+    - NutriHolder
+
+
 ---
 Only:
   classexists: 'ProductVariation'

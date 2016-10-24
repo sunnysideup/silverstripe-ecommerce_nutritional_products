@@ -16,18 +16,13 @@ class NutriHolder extends DataObject
     }
 
     private static $db = array(
-        'ProfileName' => 'Varchar',
+        'ProfileName' => 'Varchar(50)',
         'ServingCount' => 'Int',
         'Container' => 'Varchar(10)',
         'ServingSize' => 'Varchar(15)',
         'AdditionalInfo' => 'Varchar(100)'
     );
 
-    private static $has_many = array(
-        'NutriRows' => 'NutriRow',
-        'Products' => 'ProductGroup',
-        'ProductVariations' => 'ProductVariation'
-    );
 
     /**
      * @inherited
@@ -36,6 +31,16 @@ class NutriHolder extends DataObject
         'Title' => "Varchar",
         'Per100Unit' => "Varchar"
     );
+
+
+    /**
+     * Deleting Permissions
+     * @return boolean
+     */
+    public function canDelete($member = null)
+    {
+        return false;
+    }
 
     /**
      * Returns the unit for the 'Per 100' column of nutritional information. It tries
@@ -72,10 +77,11 @@ class NutriHolder extends DataObject
     );
 
     private static $searchable_fields = array(
+        'ProfileName' => 'PartialMatchFilter',
         'ServingCount' => 'ExactMatchFilter',
         'Container' => 'PartialMatchFilter',
         'ServingSize' => 'ExactMatchFilter',
-        'ServingSizeUnit' => 'PartialMatchFilter',
+        'AdditionalInfo' => 'Varchar(100)',
         'AdditionalInfo' => 'PartialMatchFilter'
     );
 
@@ -85,60 +91,6 @@ class NutriHolder extends DataObject
 
         $fields = parent::getCMSFields();
 
-        $config = GridFieldConfig_RelationEditor::create();
-        $config->addComponent(new GridFieldSortableRows('SortOrder'));
-
-        $fields->addFieldsToTab (
-            'Root.Main',
-            array(
-                NumericField::create('ServingCount', 'Servings per package')
-                    ->setRightTitle('The number of servings in the jar/bucket/bottle/conatiner'),
-                TextField::create('Container', 'The product container')
-                    ->setRightTitle('The conatiner for the product e.g. Jar, Bottle, Bucket'),
-                TextField::create('ServingSize', 'The size of each serving')
-                    ->setRightTitle('The size of each serving e.g., 3g, 30ml'),
-                TextField::create('AdditionalInfo', 'Additional information')
-                    ->setRightTitle('For example "Remove label with care."'),
-            )
-        );
-
-        $productsGrid = $fields->dataFieldByName('Products');
-        if ($productsGrid) {
-            $productsFieldConfig = GridFieldConfig_RecordViewer::create();
-            $productsGrid -> setConfig($productsFieldConfig );
-        }
-
-        $productVariationsGrid = $fields->dataFieldByName('ProductVariations');
-        if ($productVariationsGrid) {
-            $productVariationsConfig = GridFieldConfig_RecordViewer::create();
-            $productVariationsGrid -> setConfig($productVariationsConfig);
-        }
-
-        $nutriRowsGridField = $fields->dataFieldByName('NutriRows');
-
-        if ($nutriRowsGridField) {
-            $nutriRowsFieldConfig = $nutriRowsGridField ->getConfig();
-            $nutriRowsFieldConfig
-                ->addComponent(new GridFieldEditableColumns())
-                ->addComponent(new GridFieldDeleteAction())
-                ->addComponent(new GridFieldSortableRows('SortOrder'))
-                ->getComponentByType('GridFieldEditableColumns')
-
-                ->setDisplayFields(
-                    array(
-                        'Title' => array(
-                            'title' => 'Item',
-                            'field' => 'ReadonlyField'
-                        ),
-                        'PerServe'  => array(
-                            "title" => "Per Serve",
-                            "callback" => function($record, $column, $grid) { return new TextField($column, "Serve"); }),
-
-                        'Per100' => function($record, $column, $grid) {return new TextField($column, "Per 100"); }
-
-                    )
-                );
-        }
         $fields->removeFieldFromTab('Root.Main', 'SortOrder');
 
         return $fields;
