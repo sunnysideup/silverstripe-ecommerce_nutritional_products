@@ -2,7 +2,6 @@
 
 class NutriHolderProductDataExtension extends DataExtension
 {
-
     private static $has_one = array(
         'NutriHolder' => 'NutriHolder'
     );
@@ -14,7 +13,7 @@ class NutriHolderProductDataExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName('NutriHolderID');
-        if($this->owner->NutriHolder()->exists()){
+        if ($this->owner->NutriHolder()->exists()) {
             $fields->addFieldsToTab(
                 'Root.Nutrition',
                 array(
@@ -26,6 +25,4 @@ class NutriHolderProductDataExtension extends DataExtension
             );
         }
     }
-
-
 }

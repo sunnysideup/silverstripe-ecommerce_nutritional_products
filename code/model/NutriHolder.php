@@ -2,7 +2,6 @@
 
 class NutriHolder extends DataObject
 {
-
     private static $singular_name = 'Nutritional Information Profile';
     public function i18n_singular_name()
     {
@@ -47,22 +46,32 @@ class NutriHolder extends DataObject
      * to get the unit from the ServingSize field, and if no match returns 'g'
      * @return String
      */
-    function Per100Unit(){ return $this->getPer100Unit();}
-    function getPer100Unit(){
+    public function Per100Unit()
+    {
+        return $this->getPer100Unit();
+    }
+    public function getPer100Unit()
+    {
         $string = trim($this->ServingSize);
         $matches = array();
-        $matchResult = preg_match ('/ ?([A-Z]|[a-z]){1,7}/' ,$string, $matches);
-        if (!$matchResult) return "g";
+        $matchResult = preg_match('/ ?([A-Z]|[a-z]){1,7}/', $string, $matches);
+        if (!$matchResult) {
+            return "g";
+        }
         return trim($matches[0]);
     }
 
     /**
      * @return String
      */
-    function Title(){ return $this->getTitle();}
-    function getTitle(){
+    public function Title()
+    {
+        return $this->getTitle();
+    }
+    public function getTitle()
+    {
         $string = $this->ProfileName;
-        if(!$string) {
+        if (!$string) {
             $string = 'Profile #'.$this->ID.' (please customise) ';
         }
         $string .= ': ';
@@ -93,7 +102,6 @@ class NutriHolder extends DataObject
 
     public function getCMSFields()
     {
-
         $fields = parent::getCMSFields();
 
         $fields->removeFieldFromTab('Root.Main', 'SortOrder');
@@ -104,10 +112,9 @@ class NutriHolder extends DataObject
     /**
      * @return DataList
      */
-    function ShownNutriRows()
+    public function ShownNutriRows()
     {
         return $this->NutriRows()
             ->exclude(array("Hide" => 1));
     }
-
 }
