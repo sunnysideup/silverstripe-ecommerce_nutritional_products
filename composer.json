@@ -3,6 +3,9 @@
     "type": "silverstripe-module",
     "description": "Add stockists to your e-commerce application",
     "keywords": [
+        "Silverstripe-CMS",
+        "CMS",
+        "Silverstripe",
         "e-commerce",
         "shop",
         "ecommerce",
@@ -18,9 +21,10 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "^3.4",
+        "silverstripe/framework": "~3.1",
         "sunnysideup/ecommerce": "*",
-        "burnbright/silverstripe-hasonefield": "*"
+        "burnbright/silverstripe-hasonefield": "*",
+        "silverstripe/cms": "~3.1"
     },
     "extra": {
         "installer-name": "ecommerce_nutritional_products"

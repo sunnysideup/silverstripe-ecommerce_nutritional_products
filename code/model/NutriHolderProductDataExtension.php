@@ -2,7 +2,6 @@
 
 class NutriHolderProductDataExtension extends DataExtension
 {
-
     private static $has_one = array(
         'NutriHolder' => 'NutriHolder'
     );
@@ -14,23 +13,7 @@ class NutriHolderProductDataExtension extends DataExtension
     public function updateCMSFields(FieldList $fields)
     {
         $fields->removeByName('NutriHolderID');
-        if($this->owner->NutriHolder()->exists()){
-            $config = new GridFieldConfig_RelationEditor();
-            $config->removeComponentsByType('GridFieldAddNewButton');
-            $config->removeComponentsByType('GridFieldFilterHeader');
-            $config->removeComponentsByType('GridFieldAddExistingAutocompleter');
-            
-            $fields->addFieldToTab(
-                'Root.Nutrition', 
-                GridField::create(
-                    'NutriHolder', 
-                    'Nutritional Information', 
-                    NutriHolder::get()->filter(array('ID' => $this->owner->NutriHolderID)),
-                    $config
-                )
-            );
-        } else {
-
+        if ($this->owner->NutriHolder()->exists()) {
             $fields->addFieldsToTab(
                 'Root.Nutrition',
                 array(
@@ -42,6 +25,4 @@ class NutriHolderProductDataExtension extends DataExtension
             );
         }
     }
-    
-
 }

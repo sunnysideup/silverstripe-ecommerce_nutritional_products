@@ -3,7 +3,6 @@
 class NutriRow extends DataObject
 {
 
-
     private static $default_rows = array();
 
     private static $singular_name = 'Nutritional Information Item';
@@ -46,7 +45,8 @@ class NutriRow extends DataObject
         'SortOrder' => true
     );
 
-    public function Shown() {
+    public function Shown()
+    {
         return !$this->Hide;
     }
 
@@ -70,7 +70,7 @@ class NutriRow extends DataObject
     {
         $fields = parent::getCMSFields();
 
-        $fields->addFieldsToTab (
+        $fields->addFieldsToTab(
             'Root.Main',
             array(
                 CheckboxField::create('Hide', 'Hide entry')
@@ -99,27 +99,22 @@ class NutriRow extends DataObject
 
 
         $holders = NutriHolder::get();
-        foreach($holders as $holder) {
+        foreach ($holders as $holder) {
             $sortOrder = 0;
-            foreach($defaultRows as $itemName) {
+            foreach ($defaultRows as $itemName) {
                 $sortOrder++;
                 $filter = array(
                     "NutriHolderID" => $holder->ID,
                     "Title" => $itemName
                 );
                 $obj = NutriRow::get()->filter($filter)->first();
-                if( ! $obj) {
+                if (! $obj) {
                     DB::alteration_message("Creating $itemName", "created");
                     $obj = NutriRow::create($filter);
                     $obj->SortOrder = $sortOrder;
                 }
                 $obj->write();
             }
-
         }
-
     }
-
-
-
 }
