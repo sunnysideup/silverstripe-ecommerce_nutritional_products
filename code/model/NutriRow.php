@@ -4,20 +4,7 @@ class NutriRow extends DataObject
 {
 
 
-    private static $default_rows = array(
-        "Energy",
-        "Protein",
-        "Fat",
-        "saturated",
-        "trans fat",
-        "polyunsaturated",
-        "monounsaturated",
-        "Cholesterol",
-        "Carbohydrate",
-        "sugars",
-        "Dietary fibre",
-        "Sodium"
-    );
+    private static $default_rows = array();
 
     private static $singular_name = 'Nutritional Information Item';
     public function i18n_singular_name()
@@ -44,7 +31,8 @@ class NutriRow extends DataObject
     );
 
     private static $default_sort = array(
-        'SortOrder' => 'ASC',
+        'Hide' => 'ASC',
+        'SortOrder' => 'ASC'
     );
 
     private static $summary_fields = array(
