@@ -2,7 +2,6 @@
 
 class NutriRow extends DataObject
 {
-
     private static $default_rows = array();
 
     private static $singular_name = 'Nutritional Information Item';
