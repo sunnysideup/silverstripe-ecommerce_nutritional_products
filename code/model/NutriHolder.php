@@ -98,7 +98,7 @@ class NutriHolder extends DataObject
         $config = GridFieldConfig_RelationEditor::create();
         $config->addComponent(new GridFieldSortableRows('SortOrder'));
 
-        $fields->addFieldsToTab (
+        $fields->addFieldsToTab(
             'Root.Main',
             array(
                 NumericField::create('ServingCount', 'Servings per package')
@@ -115,7 +115,7 @@ class NutriHolder extends DataObject
         $productsGrid = $fields->dataFieldByName('Products');
         if ($productsGrid) {
             $productsFieldConfig = GridFieldConfig_RecordViewer::create();
-            $productsGrid -> setConfig($productsFieldConfig );
+            $productsGrid -> setConfig($productsFieldConfig);
         }
 
         $productVariationsGrid = $fields->dataFieldByName('ProductVariations');
@@ -142,9 +142,13 @@ class NutriHolder extends DataObject
                         ),
                         'PerServe'  => array(
                             "title" => "Per Serve",
-                            "callback" => function($record, $column, $grid) { return new TextField($column, "Serve"); }),
+                            "callback" => function ($record, $column, $grid) {
+                                return new TextField($column, "Serve");
+                            }),
 
-                        'Per100' => function($record, $column, $grid) {return new TextField($column, "Per 100"); }
+                        'Per100' => function ($record, $column, $grid) {
+                            return new TextField($column, "Per 100");
+                        }
 
                     )
                 );
