@@ -19,7 +19,10 @@ class NutriHolder extends DataObject
         'ServingCount' => 'Int',
         'Container' => 'Varchar(10)',
         'ServingSize' => 'Varchar(15)',
-        'AdditionalInfo' => 'Varchar(100)'
+        'AdditionalInfo' => 'Varchar(100)',
+        'HidePerServeColumn' => 'Boolean',
+        'HidePer100gColumn' => 'Boolean',
+        'HidePerDVColumn' => 'Boolean'
     );
 
 
@@ -165,5 +168,23 @@ class NutriHolder extends DataObject
     {
         return $this->NutriRows()
             ->exclude(array("Hide" => 1));
+    }
+
+    /**
+     * @return DataList
+     */
+    public function NumberOfTableColums()
+    {
+        $tablesCols = 4;
+        if($this->HidePerServeColumn){
+            $tablesCols--;
+        }
+        if($this->HidePer100gColumn){
+            $tablesCols--;
+        }
+        if($this->HidePerDVColumn){
+            $tablesCols--;
+        }
+        return $tablesCols;
     }
 }

@@ -20,6 +20,7 @@ class NutriRow extends DataObject
         'Title' => 'Varchar(30)',
         'PerServe' => 'Varchar(20)',
         'Per100' => 'Varchar(20)',
+        'DVPercentage' => 'Varchar(20)',
         'Hide' => 'Boolean',
         'SortOrder' => 'Int',
     );
@@ -80,6 +81,14 @@ class NutriRow extends DataObject
                     ->setRightTitle('For example, 1g or 2,000KJ'),
                 TextField::create('Per100', 'The amount of the item per 100g')
                     ->setRightTitle('For example, 1g or 2,000KJ'),
+                TextField::create(
+                    'DVPercentage',
+                    '% Daily Value'
+                )->setRightTitle(
+                    'Eg, 20%. <br>
+                    The % Daily Value(DV) tells you how much a nutrient in a serving of food contributes to a daily diet. <br>
+                    2,000 calories a day is used for general nutrition advice.'
+                )
             )
         );
 
