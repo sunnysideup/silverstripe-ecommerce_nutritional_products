@@ -7,7 +7,7 @@ class EcommerceNutritionalProductsTest extends SapphireTest {
 
     public function TestDevBuild()
     {
-        shell_exec('php framework/cli-script dev/build flush=all', $output, $exitStatus);
+        shell_exec('php framework/cli-script.php dev/build flush=all', $output, $exitStatus);
         $this->assertEquals(0, $exitStatus);
     }
 
