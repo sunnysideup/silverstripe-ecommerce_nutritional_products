@@ -1,13 +1,15 @@
 <?php
 class EcommerceNutritionalProductsTest extends SapphireTest {
 
-	protected $usesDatabase = false;
+    protected $usesDatabase = false;
 
-	protected $requiredExtensions = array();
+    protected $requiredExtensions = array();
 
-	public function testMyMethod() {
-		$this->assertEquals(1, 1);
-	}
+    public function TestDevBuild()
+    {
+        shell_exec('php framework/cli-script dev/build flush=all', $output, $exitStatus);
+        $this->assertEquals(0, $exitStatus);
+    }
 
 }
 
