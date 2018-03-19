@@ -1,15 +1,15 @@
 <?php
-class EcommerceNutritionalProductsTest extends SapphireTest {
 
+class EcommerceNutritionalProductsTest extends SapphireTest
+{
     protected $usesDatabase = false;
 
     protected $requiredExtensions = array();
 
     public function TestDevBuild()
     {
-        shell_exec('php framework/cli-script.php dev/build flush=all', $output, $exitStatus);
+        $exitStatus = shell_exec('php framework/cli-script.php dev/build flush=all  > dev/null; echo $?');
+        $exitStatus = intval(trim($exitStatus));
         $this->assertEquals(0, $exitStatus);
     }
-
 }
-
