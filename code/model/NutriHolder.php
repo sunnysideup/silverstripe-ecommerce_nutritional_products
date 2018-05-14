@@ -176,13 +176,13 @@ class NutriHolder extends DataObject
     public function NumberOfTableColums()
     {
         $tablesCols = 4;
-        if($this->HidePerServeColumn){
+        if ($this->HidePerServeColumn) {
             $tablesCols--;
         }
-        if($this->HidePer100gColumn){
+        if ($this->HidePer100gColumn) {
             $tablesCols--;
         }
-        if($this->HidePerDVColumn){
+        if ($this->HidePerDVColumn) {
             $tablesCols--;
         }
         return $tablesCols;
